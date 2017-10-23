@@ -39,8 +39,11 @@ def main():
     parser = ArgumentParser()
     parser.add_argument("-p", "--prefix", dest="prefix",
                         help="prefix of exported files containing blocks")
-    parser.add_argument("-b", "--bitcoin", dest="bitcoin",
-                        default="localhost", metavar="BITCOIN_HOST",
+    parser.add_argument("-b", "--bitcoin", dest="currency",
+                        default="localhost", metavar="CURRENCY_HOST",
+                        help="host running bitcoin REST interface")
+    parser.add_argument("-z", "--zcash", dest="currency",
+                        default="localhost", metavar="CURRENCY_HOST",
                         help="host running bitcoin REST interface")
     parser.add_argument("-s", "--startblock", dest="startblock",
                         default=BLOCK_0,
@@ -53,7 +56,7 @@ def main():
     args = parser.parse_args()
     if args.prefix is None:
         parser.error("Filename not given.")
-    blockutil.set_blockchain_api("http://%s:8332/rest/block/" % args.bitcoin)
+    blockutil.set_blockchain_api("http://%s:8232/rest/block/" % args.currency)
     write_blocks_to_file(args.prefix, args.startblock, args.numblocks)
 
 
