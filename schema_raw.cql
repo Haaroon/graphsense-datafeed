@@ -5,6 +5,12 @@ USE graphsense_raw;
 
 // BITCOIN blockchain data
 
+CREATE TYPE joinsplit (
+    txid blob,
+    vpub_old int,
+    vpub_new int,
+);
+
 CREATE TYPE input (
     txid blob,
     vout int
@@ -32,6 +38,7 @@ CREATE TABLE transaction (
     coinbase boolean,
     vin list<FROZEN<input>>,
     vout list<FROZEN<output>>,
+    vjoinsplit list<FROZEN<<joinsplit>>,
     PRIMARY KEY (height, tx_hash)
 );
 
